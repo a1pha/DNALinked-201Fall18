@@ -14,6 +14,7 @@ public class LinkStrand implements IDnaStrand{
 	private String myInfo;
 	private int myAppends;
 	Node node;
+	StringBuilder sb;
 	
 	public LinkStrand() {
 		this("");
@@ -31,6 +32,7 @@ public class LinkStrand implements IDnaStrand{
 	public void initialize(String source) {
 		Node node = new Node(source);
 		myFirst = node; 
+		myLast = node;
 		myInfo = node.info;
 		mySize = source.length();
 		myAppends = 0;
@@ -73,11 +75,9 @@ public class LinkStrand implements IDnaStrand{
 		}
 		return sb.toString();
 	}
-	
 	@Override
 	public char charAt(int index) {
-		// TODO Auto-generated method stub
-		return 0;
+		return myInfo.charAt(index);
 	}
 	
 
