@@ -27,8 +27,8 @@ public class TestStrand {
 	 * @return an IDnaStrand object for testing in this JUnit testing class.
 	 */
 	public IDnaStrand getNewStrand(String s) {
-		return new StringStrand(s);
-		//return new LinkStrand(s);
+		//return new StringStrand(s);
+		return new LinkStrand(s);
 		//return new StringBuilderStrand(s);
 	}
 
