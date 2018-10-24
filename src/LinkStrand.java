@@ -1,6 +1,11 @@
 
 public class LinkStrand implements IDnaStrand{
 
+	private Node myFirst,myLast;
+	private long mySize;
+	private int myAppends;
+	StringBuilder myInfo;
+	
 	private class Node {
 		String info;
 		Node next;
@@ -9,12 +14,6 @@ public class LinkStrand implements IDnaStrand{
 		    next = null;
 		}
 	}
-	private Node myFirst,myLast;
-	private long mySize;
-	private String myInfo;
-	private int myAppends;
-	Node node;
-	StringBuilder sb;
 	
 	public LinkStrand() {
 		this("");
@@ -30,10 +29,8 @@ public class LinkStrand implements IDnaStrand{
 
 	@Override
 	public void initialize(String source) {
-		Node node = new Node(source);
-		myFirst = node; 
-		myLast = node;
-		myInfo = node.info;
+		myFirst = new Node(source); 
+		myLast = myFirst;
 		mySize = source.length();
 		myAppends = 0;
 		
@@ -46,11 +43,9 @@ public class LinkStrand implements IDnaStrand{
 
 	@Override
 	public IDnaStrand append(String dna) {
-		Node clone = new Node(dna);
-		clone.next = null;
-		node.next = clone;
-		myLast = node.next;
-		myInfo = myInfo + myLast.info;
+		Node temp = new Node(dna);
+		myLast.next =  temp;
+		myLast = myLast.next;
 		mySize = mySize + dna.length();
 		myAppends++;
 		return this;
@@ -58,10 +53,7 @@ public class LinkStrand implements IDnaStrand{
 
 	@Override
 	public IDnaStrand reverse() {
-		StringBuilder copy = new StringBuilder(myInfo);
-		copy.reverse();
-		LinkStrand ss = new LinkStrand(copy.toString());
-		return ss;
+		return null;
 	}
 
 	@Override
@@ -71,12 +63,13 @@ public class LinkStrand implements IDnaStrand{
 	
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		while (node != null) {
-			sb.append(node.info);
+		myInfo = new StringBuilder();
+		Node node = myFirst;
+		while (node.next != null) {
 			node = node.next;
+			myInfo.append(node.info);
 		}
-		return sb.toString();
+		return myInfo.toString();
 	}
 	@Override
 	public char charAt(int index) {
