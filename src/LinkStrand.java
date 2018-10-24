@@ -50,6 +50,7 @@ public class LinkStrand implements IDnaStrand{
 		clone.next = null;
 		node.next = clone;
 		myLast = node.next;
+		myInfo = myInfo + myLast.info;
 		mySize = mySize + dna.length();
 		myAppends++;
 		return this;
