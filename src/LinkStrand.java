@@ -46,8 +46,11 @@ public class LinkStrand implements IDnaStrand{
 
 	@Override
 	public IDnaStrand append(String dna) {
-		node.next = new Node(dna);
+		Node clone = new Node(dna);
+		clone.next = null;
+		node.next = clone;
 		myLast = node.next;
+		myInfo = myInfo + myLast.info;
 		mySize = mySize + dna.length();
 		myAppends++;
 		return this;
