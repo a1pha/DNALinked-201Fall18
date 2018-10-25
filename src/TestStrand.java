@@ -149,6 +149,7 @@ public class TestStrand {
 			assertTrue("chars equal at "+i,all.charAt(i) == itc.next());
 		}
 		
+		
 		assertFalse(itc.hasNext());
 	}
 }

@@ -4,8 +4,10 @@ public class LinkStrand implements IDnaStrand{
 	private Node myFirst,myLast;
 	private long mySize;
 	private int myAppends;
-	StringBuilder myInfo;
-	
+	private int myIndex;
+	private int myLocalIndex;
+	private Node myCurrent;
+
 	private class Node {
 		String info;
 		Node next;
@@ -24,7 +26,7 @@ public class LinkStrand implements IDnaStrand{
 	
 	@Override
 	public long size() {
-		return myInfo.length();
+		return mySize;
 	}
 
 	@Override
@@ -33,7 +35,9 @@ public class LinkStrand implements IDnaStrand{
 		myLast = myFirst;
 		mySize = source.length();
 		myAppends = 0;
-		
+		myIndex = 0;
+		myLocalIndex = 0;
+		myCurrent = myFirst;
 	}
 
 	@Override
@@ -53,7 +57,31 @@ public class LinkStrand implements IDnaStrand{
 
 	@Override
 	public IDnaStrand reverse() {
-		return null;
+		Node copy = this.myFirst;
+		StringBuilder reverseBuilder = new StringBuilder();
+		reverseBuilder.append(copy.info);
+		reverseBuilder.reverse();
+		LinkStrand lsReverse = new LinkStrand(reverseBuilder.toString()); 
+		copy = copy.next;
+		while (copy != null) {
+			reverseBuilder = new StringBuilder();
+			reverseBuilder.append(copy.info);
+			reverseBuilder.reverse();
+			lsReverse.myFirst.next = new Node(reverseBuilder.toString());
+			lsReverse.myFirst = lsReverse.myFirst.next;
+			copy = copy.next;
+		}
+		Node previous = null;
+		Node current = lsReverse.myFirst;
+		Node next = null;
+		while (current != null) {
+			next = current.next;
+			current.next = previous;
+			previous = current;
+			current = next;
+		}
+		lsReverse.myFirst = previous; 
+		return lsReverse;
 	}
 
 	@Override
@@ -63,18 +91,47 @@ public class LinkStrand implements IDnaStrand{
 	
 	@Override
 	public String toString() {
-		myInfo = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		Node node = myFirst;
 		while (node != null) {
-			myInfo.append(node.info);
+			sb.append(node.info);
 			node = node.next;
 		}
-		return myInfo.toString();
+		return sb.toString();
 	}
 	@Override
-	public char charAt(int index) {
-		return myInfo.charAt(index);
+	public char charAt(int index) throws IndexOutOfBoundsException{
+		if (index > mySize) throw new IndexOutOfBoundsException();
+		if (myIndex == 0) {
+			myIndex = index;
+			int count = 0;
+			int dex = 0;
+			Node list = myFirst;
+			while (count != index) {
+				count++;
+				dex++;
+				if (dex >= list.info.length()) {
+					dex = 0;
+					list = list.next;
+				}
+			}
+			myLocalIndex = dex;
+	           return list.info.charAt(dex);
+	        }
+		else {
+			while (myIndex != index) {
+				myIndex++;
+				myLocalIndex++;
+				if (myLocalIndex >= myCurrent.info.length()) {
+					myLocalIndex = 0;
+					myCurrent = myCurrent.next;
+				}
+				return myCurrent.info.charAt(myLocalIndex);
+			}
+		}
+		return 0;
 	}
+
 	
 
 }
