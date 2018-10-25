@@ -24,8 +24,8 @@ public class DNABenchmark {
 	 * use a different type
 	 */
 //	private static final String strandType = "StringStrand";
-//	private static final String strandType = "LinkStrand";
-	private static final String strandType = "StringBuilderStrand";
+    private static final String strandType = "LinkStrand";
+//	private static final String strandType = "StringBuilderStrand";
 	
 	private static final String ENZYME = "gaattc";
 	private static final int TRIALS = 2;
