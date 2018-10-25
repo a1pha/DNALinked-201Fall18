@@ -50,15 +50,15 @@ public class CodonProfiler {
 				String cod = ""+a+b+c;
 				if (! map.containsKey(codons[k])) {
 					if (cod.equals(codons[k])) {
-						map.put(cod, 1);
+						map.put(codons[k], 1);
 					}
 					else {
-						map.put(cod, 0);
+						map.put(codons[k], 0);
 					}
 				}
 				else {
 					if (cod.equals(codons[k])) {
-						map.put(cod, map.get(cod) + 1);
+						map.put(codons[k], map.get(codons[k]) + 1);
 					}
 				}
 			}
