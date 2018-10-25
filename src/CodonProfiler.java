@@ -35,7 +35,6 @@ public class CodonProfiler {
 //		}
 //		return ret;
 		HashMap<String,Integer> map = new HashMap<>();
-		for(int k = 0; k < codons.length; k++) {
 			Iterator<Character> iter = strand.iterator();
 			while (iter.hasNext()) {
 				char a = iter.next();
@@ -48,24 +47,21 @@ public class CodonProfiler {
 					c = iter.next();
 				}
 				String cod = ""+a+b+c;
-				if (! map.containsKey(codons[k])) {
-					if (cod.equals(codons[k])) {
-						map.put(codons[k], 1);
-					}
-					else {
-						map.put(codons[k], 0);
-					}
+				if (! map.containsKey(cod)) {
+					map.put(cod, 1);
 				}
 				else {
-					if (cod.equals(codons[k])) {
-						map.put(codons[k], map.get(codons[k]) + 1);
-					}
+					map.put(cod, map.get(cod) + 1);
 				}
 			}
-		}
-		int[] arr = new int[map.size()];
-		for(int n = 0; n < map.size(); n++) {
-			arr[n] = map.get(codons[n]);
+		int[] arr = new int[codons.length];
+		for(int n = 0; n < codons.length; n++) {
+			if (map.containsKey(codons[n])) {
+				arr[n] = map.get(codons[n]);
+			}
+			else {
+				arr[n] = 0;
+			}
 		}
 		
 		return arr;
