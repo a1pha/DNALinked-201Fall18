@@ -1,7 +1,7 @@
-Your Name here
-Your NetID here
-Your Partner's name here (or erase)
-Your Partner's NetID here (or erase)
+Rodrigo Araujo
+Rea20
+Abhishek Jhadav
+Aj246
 
 Questions here will come from the assignment
 writeup. Be sure to copy paste questions and 

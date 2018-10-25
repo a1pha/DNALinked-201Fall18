@@ -63,6 +63,7 @@ public class LinkStrand implements IDnaStrand{
 		reverseBuilder.reverse();
 		LinkStrand lsReverse = new LinkStrand(reverseBuilder.toString()); 
 		copy = copy.next;
+		
 		while (copy != null) {
 			reverseBuilder = new StringBuilder();
 			reverseBuilder.append(copy.info);
@@ -71,6 +72,7 @@ public class LinkStrand implements IDnaStrand{
 			lsReverse.myFirst = lsReverse.myFirst.next;
 			copy = copy.next;
 		}
+		
 		Node previous = null;
 		Node current = lsReverse.myFirst;
 		Node next = null;
@@ -102,35 +104,17 @@ public class LinkStrand implements IDnaStrand{
 	@Override
 	public char charAt(int index) throws IndexOutOfBoundsException{
 		if (index > mySize) throw new IndexOutOfBoundsException();
-		if (myIndex == 0) {
-			myIndex = index;
-			int count = 0;
-			int dex = 0;
-			Node list = myFirst;
-			while (count != index) {
-				count++;
-				dex++;
-				if (dex >= list.info.length()) {
-					dex = 0;
-					list = list.next;
-				}
-			}
-			myLocalIndex = dex;
-	           return list.info.charAt(dex);
-	        }
-		else {
-			while (myIndex != index) {
-				myIndex++;
-				myLocalIndex++;
-				if (myLocalIndex >= myCurrent.info.length()) {
-					myLocalIndex = 0;
-					myCurrent = myCurrent.next;
-				}
-				return myCurrent.info.charAt(myLocalIndex);
+		while (myIndex != index) {
+			myIndex++;
+			myLocalIndex++;
+			if (myLocalIndex >= myCurrent.info.length()) {
+				myLocalIndex = 0;
+				myCurrent = myFirst.next;
 			}
 		}
-		return 0;
+	    return myCurrent.info.charAt(myLocalIndex);
 	}
+
 
 	
 
