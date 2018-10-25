@@ -13,10 +13,29 @@ public class CodonProfiler {
 	 * strand. 
 	 */
 	public int[] getCodonProfile(IDnaStrand strand, String[] codons) {
+//		int[] ret = new int[codons.length];
+//				
+//		for(int k=0; k < codons.length; k++) {
+//			Iterator<Character> iter = strand.iterator();
+//			while (iter.hasNext()) {
+//				char a = iter.next();
+//				char b = 'z';           // not part of any real codon
+//				char c = 'z';           // Original Code
+//				if (iter.hasNext()) {   
+//					b = iter.next();
+//				}
+//				if (iter.hasNext()) {
+//					c = iter.next();
+//				}
+//				String cod = ""+a+b+c;
+//				if (cod.equals(codons[k])) {
+//					ret[k] += 1;
+//				}
+//			}
+//		}
+//		return ret;
 		HashMap<String,Integer> map = new HashMap<>();
-		int[] ret = new int[codons.length];
-				
-		for(int k=0; k < codons.length; k++) {
+		for(int k = 0; k < codons.length; k++) {
 			Iterator<Character> iter = strand.iterator();
 			while (iter.hasNext()) {
 				char a = iter.next();
@@ -29,11 +48,26 @@ public class CodonProfiler {
 					c = iter.next();
 				}
 				String cod = ""+a+b+c;
-				if (cod.equals(codons[k])) {
-					ret[k] += 1;
+				if (! map.containsKey(codons[k])) {
+					if (cod.equals(codons[k])) {
+						map.put(cod, 1);
+					}
+					else {
+						map.put(cod, 0);
+					}
+				}
+				else {
+					if (cod.equals(codons[k])) {
+						map.put(cod, map.get(cod) + 1);
+					}
 				}
 			}
 		}
-		return ret;
+		int[] arr = new int[map.size()];
+		for(int n = 0; n < map.size(); n++) {
+			arr[n] = map.get(codons[n]);
+		}
+		
+		return arr;
 	}
 }
