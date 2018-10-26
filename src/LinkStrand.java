@@ -68,8 +68,8 @@ public class LinkStrand implements IDnaStrand{
 			reverseBuilder = new StringBuilder();
 			reverseBuilder.append(copy.info);
 			reverseBuilder.reverse();
-			lsReverse.myFirst.next = new Node(reverseBuilder.toString());
-			lsReverse.myFirst = lsReverse.myFirst.next;
+			lsReverse.myLast.next = new Node(reverseBuilder.toString());
+			lsReverse.myLast = lsReverse.myLast.next;
 			copy = copy.next;
 		}
 		
@@ -103,7 +103,7 @@ public class LinkStrand implements IDnaStrand{
 	}
 	@Override
 	public char charAt(int index) throws IndexOutOfBoundsException{
-		if (index > mySize) throw new IndexOutOfBoundsException();
+		if (index >= mySize || index < 0) throw new IndexOutOfBoundsException();
 		if (index < myIndex || myIndex == 0) {
 			myIndex = index;
 			int count = 0;
