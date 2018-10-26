@@ -69,6 +69,7 @@ public class LinkStrand implements IDnaStrand{
 			reverseBuilder.append(copy.info);
 			reverseBuilder.reverse();
 			lsReverse.myLast.next = new Node(reverseBuilder.toString());
+			lsReverse.mySize+= reverseBuilder.length();
 			lsReverse.myLast = lsReverse.myLast.next;
 			copy = copy.next;
 		}

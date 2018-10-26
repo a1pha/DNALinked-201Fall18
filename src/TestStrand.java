@@ -77,9 +77,11 @@ public class TestStrand {
 	@Test(timeout = 10000)
 	public void testReverse() {
 		for (String s : strs) {
-			IDnaStrand strand = getNewStrand(s);
+			IDnaStrand strand = getNewStrand("");
+			strand.append(s);
 			IDnaStrand rev = strand.reverse();
 			String rs = new StringBuilder(s).reverse().toString();
+			assertEquals(rs.length(), rev.size());
 			assertEquals("This test checks if reverse works correctly for "
 					+ "simple cases. The test case failed on was " + s, rev.toString(), rs);
 		}
