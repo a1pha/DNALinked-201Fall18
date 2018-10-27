@@ -100,3 +100,5 @@ links without shifting everything down a place. We believe the memory exhausted
 at 692,568,111,831 because that was the physical limit of the memory allocation
 as opposed to the other two (StringStrand and StringBuilderStrand) where the size
 was ended sooner due to String and StringBuilders physical limitations. 
+
+This is also due to the fact that LinkStrand doesn't store the strings in the someway StringStrand and StringBuilderStrand do, those store them in a a book-like fashion which takes more memory verses a pointer fashion.
